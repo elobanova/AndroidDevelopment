@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="btnLabel">Add me to your list of users</string>
+    <string name="lgLabel">Login:</string>
+    <string name="formLabel">Registration Form</string>
+    <string name="lgValue">Text set from listener</string>
+</resources>
