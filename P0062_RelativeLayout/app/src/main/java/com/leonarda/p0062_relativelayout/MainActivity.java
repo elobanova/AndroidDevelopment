@@ -7,6 +7,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -20,6 +21,7 @@ public class MainActivity extends ActionBarActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        Toast.makeText(MainActivity.this, R.string.message_string, Toast.LENGTH_LONG).show();
                         EditText login = (EditText)findViewById(R.id.loginvalue);
                         login.setText(R.string.lgValue);
                         v.setBackgroundColor(getResources().getColor(R.color.btnBackground));
