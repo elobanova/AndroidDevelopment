@@ -9,6 +9,9 @@ import android.widget.Toast;
 
 public class MainActivity extends ActionBarActivity {
 
+    private static final int ADDITIONAL_GROUP = R.id.group1;
+    private boolean showAdditionalGroup = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,6 +24,13 @@ public class MainActivity extends ActionBarActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        //this method is being called every time the menu is displayed
+        menu.setGroupVisible(ADDITIONAL_GROUP, showAdditionalGroup);
+        return super.onPrepareOptionsMenu(menu);
     }
 
     @Override

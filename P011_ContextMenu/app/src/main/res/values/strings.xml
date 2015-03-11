@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">P011_ContextMenu</string>
+
+    <string name="change_color">Change color!</string>
+    <string name="action_settings">Settings</string>
+    <string name="change_font">Change font!</string>
+
+    <string name="purple_color">Make me purple!</string>
+    <string name="aqua_color">Make me aqua!</string>
+    <string name="lemon_color">Make me lemon!</string>
+
+    <string name="small_font">Make me small!</string>
+    <string name="large_font">Make me big!</string>
+</resources>
