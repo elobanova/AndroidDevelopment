@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purpleboxColor">#660066</color>
+    <color name="yellowboxColor">#ffff00</color>
+    <color name="blueboxColor">#66cccc</color>
+    <color name="whiteboxColor">#ffffff</color>
+    <color name="greyboxColor">#808080</color>
+</resources>

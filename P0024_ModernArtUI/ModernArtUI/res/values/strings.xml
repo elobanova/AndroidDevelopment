@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">ModernUI</string>
+    <string name="title_main">Modern Art UI</string>
+    <string name="information">More information</string>
+	<string name="message">Inspired by the works of artists such as Piet Mondrian and Ben Nicholson.
+	    
+	    Click below to learn more!</string>
+	<string name="notnow">Not Now</string>
+	<string name="visitmoma">Visit MOMA</string>
+</resources>
