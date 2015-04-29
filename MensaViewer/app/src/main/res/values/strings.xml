@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">MensaViewer</string>
-
+    <string name="information">More information</string>
+	<string name="message">This application is an Android application for RWTH Mensa Resource. Click below to learn more!</string>
+    <string name="notnow">Not Now</string>
+    <string name="visitmensa">Visit Mensa Page</string>
     <string name="action_settings">Settings</string>
 </resources>
