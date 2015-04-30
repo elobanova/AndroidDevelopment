@@ -11,16 +11,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
-import rwth.lab.android.mensaviewer.http.HttpGetTask;
+import rwth.lab.android.mensaviewer.http.OnResponseListener;
+import rwth.lab.android.mensaviewer.http.WeekPlanGetRequest;
+import rwth.lab.android.mensaviewer.model.MensaListItem;
+import rwth.lab.android.mensaviewer.model.WeekPlan;
 
 /**
  * Created by ekaterina on 30.04.2015.
  */
 public class ViewerInitialActivity extends ListActivity {
 
-    private static final String[] LIST_OF_MENSAS = {"Mensa Ahornstraße", "Mensa Vita"};
     private static final int MENU_INFORMATION = Menu.FIRST;
     private static final String TAG = "Mensa-Viewer";
     private static final String URL = "https://laboratory.comsys.rwth-aachen.de/groups/evgenijandkate";
@@ -51,7 +52,19 @@ public class ViewerInitialActivity extends ListActivity {
                 Object item = adapter.getItem(position);
                 if (item instanceof MensaListItem) {
                     MensaListItem mensaListItem = (MensaListItem) item;
-                    new HttpGetTask(mensaListItem).execute();
+//                    WeekPlanGetRequest httpGet = new WeekPlanGetRequest(mensaListItem);
+//                    httpGet.setOnResponseListener(new OnResponseListener() {
+//                        @Override
+//                        public void onResponse(WeekPlan weekPlan) {
+//
+//                        }
+//
+//                        @Override
+//                        public void onError(String errorMessage) {
+//
+//                        }
+//                    });
+//                    httpGet.send();
                 }
             }
         });
@@ -60,9 +73,8 @@ public class ViewerInitialActivity extends ListActivity {
     private void addMensaItemsToAdapter() {
         if (this.adapter != null) {
             //TODO: retrieve a list of mensas from website, can be left as it is now
-            for (int i = 0; i < LIST_OF_MENSAS.length; i++) {
-                this.adapter.add(new MensaListItem(LIST_OF_MENSAS[i], i));
-            }
+            this.adapter.add(new MensaListItem("Mensa Ahornstraße", "http://www.studentenwerk-aachen.de/speiseplaene/ahornstrasse-w.html", 0));
+            this.adapter.add(new MensaListItem("Mensa Vita", "http://www.studentenwerk-aachen.de/speiseplaene/vita-w.html", 1));
         }
     }
 

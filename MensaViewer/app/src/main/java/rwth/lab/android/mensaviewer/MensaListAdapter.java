@@ -10,6 +10,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import rwth.lab.android.mensaviewer.model.MensaListItem;
+
 /**
  * Created by ekaterina on 30.04.2015.
  */
