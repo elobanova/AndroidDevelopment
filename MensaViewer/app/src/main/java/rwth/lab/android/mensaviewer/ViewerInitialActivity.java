@@ -13,6 +13,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import rwth.lab.android.mensaviewer.http.HttpGetTask;
+
 /**
  * Created by ekaterina on 30.04.2015.
  */
@@ -21,7 +23,7 @@ public class ViewerInitialActivity extends ListActivity {
     private static final String[] LIST_OF_MENSAS = {"Mensa Ahornstraße", "Mensa Vita"};
     private static final int MENU_INFORMATION = Menu.FIRST;
     private static final String TAG = "Mensa-Viewer";
-    private static final String URL = "http://www.studentenwerk-aachen.de/de/gastronomie/speiseplaene.html";
+    private static final String URL = "https://laboratory.comsys.rwth-aachen.de/groups/evgenijandkate";
 
     private DialogFragment dialog;
     private MensaListAdapter adapter;
@@ -45,12 +47,11 @@ public class ViewerInitialActivity extends ListActivity {
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                // TODO: Call HTTP GET
+
                 Object item = adapter.getItem(position);
                 if (item instanceof MensaListItem) {
                     MensaListItem mensaListItem = (MensaListItem) item;
-                    Toast.makeText(getApplicationContext(),
-                            String.valueOf(mensaListItem.getMensaId()), Toast.LENGTH_SHORT).show();
+                    new HttpGetTask(mensaListItem).execute();
                 }
             }
         });

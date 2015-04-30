@@ -24,7 +24,7 @@ public class InformationDialogFragment extends DialogFragment {
                 .setCancelable(false)
 
                         // Set up browse Button
-                .setPositiveButton(R.string.visitmensa,
+                .setPositiveButton(R.string.visitgitlab,
                         new DialogInterface.OnClickListener() {
                             public void onClick(final DialogInterface dialog,
                                                 int id) {
