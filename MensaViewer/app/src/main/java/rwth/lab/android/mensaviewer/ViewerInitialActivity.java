@@ -25,6 +25,7 @@ public class ViewerInitialActivity extends ListActivity {
     private static final int MENU_INFORMATION = Menu.FIRST;
     private static final String TAG = "Mensa-Viewer";
     private static final String URL = "https://laboratory.comsys.rwth-aachen.de/groups/evgenijandkate";
+    public static final String MENSA_ITEM = "item";
 
     private DialogFragment dialog;
     private MensaListAdapter adapter;
@@ -52,19 +53,9 @@ public class ViewerInitialActivity extends ListActivity {
                 Object item = adapter.getItem(position);
                 if (item instanceof MensaListItem) {
                     MensaListItem mensaListItem = (MensaListItem) item;
-//                    WeekPlanGetRequest httpGet = new WeekPlanGetRequest(mensaListItem);
-//                    httpGet.setOnResponseListener(new OnResponseListener() {
-//                        @Override
-//                        public void onResponse(WeekPlan weekPlan) {
-//
-//                        }
-//
-//                        @Override
-//                        public void onError(String errorMessage) {
-//
-//                        }
-//                    });
-//                    httpGet.send();
+                    Intent intent = new Intent(ViewerInitialActivity.this, MensaMenuActivity.class);
+                    intent.putExtra(MENSA_ITEM, mensaListItem);
+                    startActivity(intent);
                 }
             }
         });

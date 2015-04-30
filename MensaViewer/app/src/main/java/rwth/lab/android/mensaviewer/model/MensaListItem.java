@@ -1,9 +1,11 @@
 package rwth.lab.android.mensaviewer.model;
 
+import java.io.Serializable;
+
 /**
  * Created by ekaterina on 30.04.2015.
  */
-public class MensaListItem {
+public class MensaListItem implements Serializable {
     private final String mensaName;
     private final String mensaURL;
     private final int mensaId;
