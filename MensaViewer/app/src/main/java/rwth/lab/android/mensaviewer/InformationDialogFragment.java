@@ -6,6 +6,9 @@ import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
+/**
+ * Created by ekaterina on 30.04.2015.
+ */
 public class InformationDialogFragment extends DialogFragment {
     public static InformationDialogFragment newInstance() {
         return new InformationDialogFragment();

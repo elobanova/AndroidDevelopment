@@ -10,12 +10,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-
+/**
+ * Created by ekaterina on 30.04.2015.
+ */
 public class ViewerInitialActivity extends ListActivity {
 
     private static final String[] LIST_OF_MENSAS = {"Mensa Ahornstraße", "Mensa Vita"};
@@ -23,15 +23,18 @@ public class ViewerInitialActivity extends ListActivity {
     private static final String TAG = "Mensa-Viewer";
     private static final String URL = "http://www.studentenwerk-aachen.de/de/gastronomie/speiseplaene.html";
 
-    private DialogFragment mDialog;
+    private DialogFragment dialog;
+    private MensaListAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         // Create a new Adapter containing a list of mensas
         // Set the adapter on this ListActivity's built-in ListView
-        setListAdapter(new ArrayAdapter<String>(this, R.layout.list_item,
-                LIST_OF_MENSAS));
+        this.adapter = new MensaListAdapter(getApplicationContext());
+        addMensaItemsToAdapter();
+        setListAdapter(this.adapter);
 
         ListView lv = getListView();
 
@@ -42,12 +45,24 @@ public class ViewerInitialActivity extends ListActivity {
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-
                 // TODO: Call HTTP GET
-                Toast.makeText(getApplicationContext(),
-                        ((TextView) view).getText(), Toast.LENGTH_SHORT).show();
+                Object item = adapter.getItem(position);
+                if (item instanceof MensaListItem) {
+                    MensaListItem mensaListItem = (MensaListItem) item;
+                    Toast.makeText(getApplicationContext(),
+                            String.valueOf(mensaListItem.getMensaId()), Toast.LENGTH_SHORT).show();
+                }
             }
         });
+    }
+
+    private void addMensaItemsToAdapter() {
+        if (this.adapter != null) {
+            //TODO: retrieve a list of mensas from website, can be left as it is now
+            for (int i = 0; i < LIST_OF_MENSAS.length; i++) {
+                this.adapter.add(new MensaListItem(LIST_OF_MENSAS[i], i));
+            }
+        }
     }
 
     @Override
@@ -70,8 +85,8 @@ public class ViewerInitialActivity extends ListActivity {
     }
 
     private void showDialogFragment() {
-        mDialog = InformationDialogFragment.newInstance();
-        mDialog.show(getFragmentManager(), "Alert");
+        this.dialog = InformationDialogFragment.newInstance();
+        this.dialog.show(getFragmentManager(), "Alert");
     }
 
     /**
