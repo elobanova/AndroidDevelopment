@@ -7,7 +7,7 @@ import java.util.Deque;
 
 /**
  * Created by evgenijavstein on 30/04/15.
- * <p/>
+ *
  * Helper class to get rid of & signs which
  * makes the XMLPullParser fails, since & signs should be
  * encoded as &amp;
