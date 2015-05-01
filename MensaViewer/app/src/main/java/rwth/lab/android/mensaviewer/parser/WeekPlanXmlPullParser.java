@@ -347,7 +347,7 @@ public class WeekPlanXmlPullParser  {
      * Helper method during development
      * @return
      */
-    private String getInputStreamString(){
+    public String getInputStreamString(){
         this.inputStream=inputStream;
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
         StringBuilder out = new StringBuilder();
