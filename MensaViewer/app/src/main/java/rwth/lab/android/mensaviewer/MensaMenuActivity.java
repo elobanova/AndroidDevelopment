@@ -23,10 +23,6 @@ public class MensaMenuActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mensa_menu_activity);
 
-        ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
-        viewPager.setAdapter(new MenuFragmentPagerAdapter(getSupportFragmentManager(),
-                MensaMenuActivity.this));
-
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             mensa = (MensaListItem) extras.getSerializable(ViewerInitialActivity.MENSA_ITEM);
@@ -36,7 +32,9 @@ public class MensaMenuActivity extends FragmentActivity {
             getRequest.setOnResponseListener(new OnResponseListener() {
                 @Override
                 public void onResponse(WeekPlan weekPlan) {
-
+                    ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
+                    viewPager.setAdapter(new MenuFragmentPagerAdapter(weekPlan, getSupportFragmentManager(),
+                            MensaMenuActivity.this));
                 }
 
                 @Override

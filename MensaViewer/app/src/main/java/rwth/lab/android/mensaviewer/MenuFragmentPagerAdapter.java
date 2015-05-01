@@ -5,22 +5,24 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import rwth.lab.android.mensaviewer.model.WeekPlan;
+
 /**
  * Created by ekaterina on 01.05.2015.
  */
 public class MenuFragmentPagerAdapter extends FragmentStatePagerAdapter {
-    final int PAGE_COUNT = 3;
-    private String tabTitles[] = new String[] { "Tab1", "Tab2", "Tab3" };
     private Context context;
+    private WeekPlan weekPlan;
 
-    public MenuFragmentPagerAdapter(FragmentManager fm, Context context) {
+    public MenuFragmentPagerAdapter(WeekPlan weekPlan, FragmentManager fm, Context context) {
         super(fm);
+        this.weekPlan = weekPlan;
         this.context = context;
     }
 
     @Override
     public int getCount() {
-        return PAGE_COUNT;
+        return weekPlan.getDayList().size();
     }
 
     @Override
@@ -30,7 +32,6 @@ public class MenuFragmentPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        // Generate title based on item position
-        return tabTitles[position];
+        return weekPlan.getDayList().get(position).getHeader();
     }
 }
