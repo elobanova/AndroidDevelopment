@@ -48,16 +48,6 @@ public class MenuFragment extends ListFragment {
         setListAdapter(this.adapter);
     }
 
-//    @Override
-//    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-//                             Bundle savedInstanceState) {
-//        View view = inflater.inflate(R.layout.fragment_page, container, false);
-//        this.adapter = new MenuListAdapter(getActivity().getApplicationContext());
-//        addMenuItemsToAdapter();
-//        setListAdapter(this.adapter);
-//        return view;
-//    }
-
     private void addMenuItemsToAdapter() {
         if (this.adapter != null && this.menues != null) {
             for (Menu menu : this.menues) {
