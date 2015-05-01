@@ -2,6 +2,8 @@ package rwth.lab.android.mensaviewer.http;
 
 import android.os.AsyncTask;
 
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -63,6 +65,9 @@ public class WeekPlanGetRequest {
                 return null;
             } catch (IOException e) {
                 e.printStackTrace();
+                onResponseListener.onError(e.getMessage());
+                return null;
+            } catch (XmlPullParserException e) {
                 onResponseListener.onError(e.getMessage());
                 return null;
             } finally {
