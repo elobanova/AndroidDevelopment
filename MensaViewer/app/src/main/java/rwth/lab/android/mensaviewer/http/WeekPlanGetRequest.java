@@ -4,13 +4,11 @@ import android.os.AsyncTask;
 
 import org.xmlpull.v1.XmlPullParserException;
 
-import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
-import java.util.zip.GZIPInputStream;
 
 import rwth.lab.android.mensaviewer.model.MensaListItem;
 import rwth.lab.android.mensaviewer.model.WeekPlan;
@@ -51,14 +49,10 @@ public class WeekPlanGetRequest {
                 conn.setReadTimeout(READ_TIMEOUT);
                 conn.setConnectTimeout(CONNECT_TIMEOUT);
                 conn.setRequestMethod("GET");
-                conn.setRequestProperty("Accept-Encoding", "gzip");/* leverage gzip compression to save bandwidth.*/
-
                 conn.setDoInput(true);
                 conn.connect();
 
-                /*decompress gzip stream*/
-                GZIPInputStream gzipInputStream = new GZIPInputStream(new BufferedInputStream(conn.getInputStream()));
-                WeekPlanXmlPullParser parser = new WeekPlanXmlPullParser(gzipInputStream);
+                WeekPlanXmlPullParser parser = new WeekPlanXmlPullParser(conn.getInputStream());
 
                 return parser.parse();
             } catch (MalformedURLException e) {

@@ -6,10 +6,8 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.PagerTitleStrip;
 import android.support.v4.view.ViewPager;
 
-import rwth.lab.android.mensaviewer.http.OnResponseListener;
 import rwth.lab.android.mensaviewer.http.WeekPlanGetRequest;
 import rwth.lab.android.mensaviewer.model.MensaListItem;
-import rwth.lab.android.mensaviewer.model.WeekPlan;
 
 /**
  * Created by я on 30.04.2015.
@@ -33,18 +31,6 @@ public class MensaMenuActivity extends FragmentActivity {
 
             //TODO continue
             getRequest = new WeekPlanGetRequest(mensa);
-            getRequest.setOnResponseListener(new OnResponseListener() {
-                @Override
-                public void onResponse(WeekPlan weekPlan) {
-
-                }
-
-                @Override
-                public void onError(String errorMessage) {
-
-                }
-            });
-            getRequest.send();
         }
     }
 }

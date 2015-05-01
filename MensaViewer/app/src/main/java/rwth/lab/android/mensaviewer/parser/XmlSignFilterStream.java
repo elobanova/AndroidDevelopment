@@ -1,5 +1,6 @@
 package rwth.lab.android.mensaviewer.parser;
 
+import java.io.FilterInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayDeque;
@@ -20,6 +21,8 @@ public class XmlSignFilterStream extends InputStream {
     private final Deque<Byte> backBuf = new ArrayDeque<Byte>();
     private final InputStream in;
 
+
+
     public XmlSignFilterStream(InputStream in) {
         this.in = in;
     }
@@ -39,18 +42,19 @@ public class XmlSignFilterStream extends InputStream {
     private void peekAndReplace() throws IOException {
         int read = super.read(readBuf, 0, REPLACEMENT.length);
         for (int i1 = read - 1; i1 >= 0; i1--) {
-            backBuf.push(readBuf[i1]); //first take letters which you would loose else, by just replacing & with amp;
+            backBuf.push(readBuf[i1]);//first take letters which you would loose else, by just replacing & with amp;
         }
         for (int i = 0; i < REPLACEMENT.length; i++) {
             if (read != REPLACEMENT.length || readBuf[i] != REPLACEMENT[i]) {
                 for (int j = REPLACEMENT.length - 1; j >= 0; j--) {
                     // In reverse order
-                    backBuf.push(REPLACEMENT[j]); //then appends replacement "amp;" letters
+                    backBuf.push(REPLACEMENT[j]);//then appends replacement "amp;" letters
                 }
                 return;
             }
         }
     }
+
 }
 
 
