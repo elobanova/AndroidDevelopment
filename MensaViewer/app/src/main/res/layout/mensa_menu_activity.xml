@@ -19,7 +19,7 @@
             android:layout_height="70dp"
             android:layout_gravity="top"
             android:background="#ff363636"
-            android:textColor="#f8f8f8"
+            style="@style/strip"
             android:paddingTop="4dp"
             android:paddingBottom="4dp" />
 

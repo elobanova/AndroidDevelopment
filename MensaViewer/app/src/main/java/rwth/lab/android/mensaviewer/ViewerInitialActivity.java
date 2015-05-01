@@ -12,10 +12,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import rwth.lab.android.mensaviewer.http.OnResponseListener;
-import rwth.lab.android.mensaviewer.http.WeekPlanGetRequest;
+import rwth.lab.android.mensaviewer.adapters.MensaListAdapter;
+import rwth.lab.android.mensaviewer.fragments.InformationDialogFragment;
 import rwth.lab.android.mensaviewer.model.MensaListItem;
-import rwth.lab.android.mensaviewer.model.WeekPlan;
 
 /**
  * Created by ekaterina on 30.04.2015.

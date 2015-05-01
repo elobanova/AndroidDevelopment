@@ -1,11 +1,10 @@
 package rwth.lab.android.mensaviewer;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.view.PagerTitleStrip;
 import android.support.v4.view.ViewPager;
 
+import rwth.lab.android.mensaviewer.adapters.MenuFragmentPagerAdapter;
 import rwth.lab.android.mensaviewer.http.OnResponseListener;
 import rwth.lab.android.mensaviewer.http.WeekPlanGetRequest;
 import rwth.lab.android.mensaviewer.model.MensaListItem;
@@ -15,6 +14,7 @@ import rwth.lab.android.mensaviewer.model.WeekPlan;
  * Created by я on 30.04.2015.
  */
 public class MensaMenuActivity extends FragmentActivity {
+    public static final int DEFAULT_FONT_SIZE = 24;
     private MensaListItem mensa;
     private WeekPlanGetRequest getRequest;
 

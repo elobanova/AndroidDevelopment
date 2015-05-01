@@ -1,51 +1,21 @@
-package rwth.lab.android.mensaviewer;
+package rwth.lab.android.mensaviewer.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import rwth.lab.android.mensaviewer.R;
 import rwth.lab.android.mensaviewer.model.MensaListItem;
 
 /**
  * Created by ekaterina on 30.04.2015.
  */
-public class MensaListAdapter extends BaseAdapter {
-    private final List<MensaListItem> items = new ArrayList<MensaListItem>();
-    private final Context context;
+public class MensaListAdapter extends AbstractListAdapter<MensaListItem> {
 
     public MensaListAdapter(Context context) {
-        this.context = context;
-    }
-
-    public void add(MensaListItem item) {
-        items.add(item);
-        notifyDataSetChanged();
-    }
-
-    public void clear() {
-        items.clear();
-        notifyDataSetChanged();
-    }
-
-    @Override
-    public int getCount() {
-        return items.size();
-    }
-
-    @Override
-    public Object getItem(int pos) {
-        return items.get(pos);
-    }
-
-    @Override
-    public long getItemId(int pos) {
-        return items.get(pos).getMensaId();
+        super(context);
     }
 
     @Override
@@ -55,7 +25,7 @@ public class MensaListAdapter extends BaseAdapter {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         if (convertView == null) {
-            view = inflater.inflate(R.layout.list_item, parent, false);
+            view = inflater.inflate(R.layout.mensa_list_item, parent, false);
         } else {
             view = convertView;
         }

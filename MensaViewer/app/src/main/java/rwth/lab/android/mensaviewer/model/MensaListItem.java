@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Created by ekaterina on 30.04.2015.
  */
-public class MensaListItem implements Serializable {
+public class MensaListItem implements Serializable, IListItem {
     private final String mensaName;
     private final String mensaURL;
     private final int mensaId;
@@ -24,7 +24,8 @@ public class MensaListItem implements Serializable {
         return this.mensaURL;
     }
 
-    public int getMensaId() {
+    @Override
+    public int getId() {
         return this.mensaId;
     }
 }

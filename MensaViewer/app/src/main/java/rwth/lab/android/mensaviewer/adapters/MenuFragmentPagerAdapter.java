@@ -1,10 +1,11 @@
-package rwth.lab.android.mensaviewer;
+package rwth.lab.android.mensaviewer.adapters;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import rwth.lab.android.mensaviewer.fragments.MenuFragment;
 import rwth.lab.android.mensaviewer.model.WeekPlan;
 
 /**
@@ -27,7 +28,7 @@ public class MenuFragmentPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return MenuFragment.newInstance(position + 1);
+        return MenuFragment.newInstance(weekPlan.getDayList().get(position));
     }
 
     @Override

@@ -1,9 +1,11 @@
 package rwth.lab.android.mensaviewer.model;
 
+import java.io.Serializable;
+
 /**
  * Created by evgenijavstein on 29/04/15.
  */
-public class Menu {
+public class Menu implements Serializable, IListItem {
     private String category;
     private String menu;
     private String price;
@@ -30,5 +32,11 @@ public class Menu {
 
     public void setPrice(String price) {
         this.price = price;
+    }
+
+    @Override
+    public int getId() {
+        //TODO
+        return 0;
     }
 }

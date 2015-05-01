@@ -1,10 +1,13 @@
-package rwth.lab.android.mensaviewer;
+package rwth.lab.android.mensaviewer.fragments;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
+
+import rwth.lab.android.mensaviewer.R;
+import rwth.lab.android.mensaviewer.ViewerInitialActivity;
 
 /**
  * Created by ekaterina on 30.04.2015.
