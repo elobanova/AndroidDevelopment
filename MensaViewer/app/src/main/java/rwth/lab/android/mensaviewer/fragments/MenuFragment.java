@@ -1,19 +1,11 @@
 package rwth.lab.android.mensaviewer.fragments;
 
-import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import rwth.lab.android.mensaviewer.R;
 import rwth.lab.android.mensaviewer.adapters.MenuListAdapter;
 import rwth.lab.android.mensaviewer.model.DayPlan;
 import rwth.lab.android.mensaviewer.model.Menu;
@@ -51,17 +43,9 @@ public class MenuFragment extends ListFragment {
         for (int i = 0; i < this.menuesCount; i++) {
             menues.add(i, (Menu) getArguments().getSerializable(MENU_PREFIX + i));
         }
-        int layout = Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB ? android.R.layout.simple_list_item_activated_1
-                : android.R.layout.simple_list_item_1;
-        String[] menuItems = new String[this.menuesCount];
-        for (int i = 0; i < menuesCount; i++) {
-            menuItems[i] = menues.get(i).getMenu();
-        }
-        //TODO make it through adapter!!
-        //  new MenuListAdapter(getActivity().getApplicationContext());
-
-        // Set the list adapter for this ListFragment
-        setListAdapter(new ArrayAdapter<String>(getActivity(), layout, menuItems));
+        this.adapter = new MenuListAdapter(getActivity().getApplicationContext());
+        addMenuItemsToAdapter();
+        setListAdapter(this.adapter);
     }
 
 //    @Override
