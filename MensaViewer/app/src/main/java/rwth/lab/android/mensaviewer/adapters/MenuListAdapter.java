@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import rwth.lab.android.mensaviewer.R;
@@ -21,19 +22,23 @@ public class MenuListAdapter extends AbstractListAdapter<Menu> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view;
-        TextView text;
+
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         if (convertView == null) {
-            view = inflater.inflate(R.layout.menu_list_item, parent, false);
+            view = inflater.inflate(R.layout.menu_plan_list_item, parent, false);
         } else {
             view = convertView;
         }
 
-        if (view instanceof TextView) {
-            text = (TextView) view;
+        if (view instanceof LinearLayout) {
             Menu item = (Menu) getItem(position);
-            text.setText(item.getMenu());
+            TextView category = (TextView)view.findViewById(R.id.category);
+            category.setText(item.getCategory());
+            TextView dish = (TextView)view.findViewById(R.id.dish);
+            dish.setText(item.getMenu());
+            TextView price = (TextView)view.findViewById(R.id.price);
+            price.setText(item.getPrice());
         }
         return view;
     }
