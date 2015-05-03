@@ -11,6 +11,7 @@ import java.util.List;
 
 import rwth.lab.android.mensaviewer.adapters.MenuListAdapter;
 import rwth.lab.android.mensaviewer.model.DayPlan;
+import rwth.lab.android.mensaviewer.model.IMenuItem;
 import rwth.lab.android.mensaviewer.model.Menu;
 
 /**
@@ -19,13 +20,13 @@ import rwth.lab.android.mensaviewer.model.Menu;
 public class MenuFragment extends ListFragment {
     public static final String MENUES_KEY = "MENUES";
 
-    private List<Menu> menues;
+    private List<IMenuItem> menuItems;
     private MenuListAdapter adapter;
 
     public static MenuFragment newInstance(DayPlan dayPlan) {
         Bundle args = new Bundle();
-        List<Menu> menues = dayPlan.getMenues();
-        args.putSerializable(MENUES_KEY, (Serializable) menues);
+        List<IMenuItem> menuEntries = dayPlan.getMenuItems();
+        args.putSerializable(MENUES_KEY, (Serializable) menuEntries);
 
         MenuFragment fragment = new MenuFragment();
         fragment.setArguments(args);
@@ -35,7 +36,7 @@ public class MenuFragment extends ListFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.menues = (ArrayList) getArguments().getSerializable(MENUES_KEY);
+        this.menuItems = (ArrayList) getArguments().getSerializable(MENUES_KEY);
         this.adapter = new MenuListAdapter(getActivity().getApplicationContext());
         addMenuItemsToAdapter();
         setListAdapter(this.adapter);
@@ -48,8 +49,8 @@ public class MenuFragment extends ListFragment {
     }
 
     private void addMenuItemsToAdapter() {
-        if (this.adapter != null && this.menues != null) {
-            for (Menu menu : this.menues) {
+        if (this.adapter != null && this.menuItems != null) {
+            for (IMenuItem menu : this.menuItems) {
                 this.adapter.add(menu);
             }
         }

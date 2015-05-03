@@ -17,6 +17,13 @@ public class DayPlan {
         return this.menues;
     }
 
+    public List<IMenuItem> getMenuItems() {
+        List<IMenuItem> menuItems = new ArrayList<IMenuItem>();
+        menuItems.addAll(this.menues);
+        menuItems.addAll(this.extras);
+        return menuItems;
+    }
+
     public void setMenues(List<Menu> menues) {
         this.menues = menues;
     }

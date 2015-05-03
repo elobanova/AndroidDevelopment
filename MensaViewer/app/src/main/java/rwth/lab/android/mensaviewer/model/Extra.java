@@ -3,10 +3,11 @@ package rwth.lab.android.mensaviewer.model;
 /**
  * Created by evgenijavstein on 29/04/15.
  */
-public class Extra {
+public class Extra implements IMenuItem {
     private String category;
     private String extra;
 
+    @Override
     public String getCategory() {
         return this.category;
     }
@@ -15,11 +16,22 @@ public class Extra {
         this.category = category;
     }
 
-    public String getExtra() {
+    @Override
+    public String getDish() {
         return this.extra;
     }
 
     public void setExtra(String extra) {
         this.extra = extra;
+    }
+
+    @Override
+    public String getPrice() {
+        return "";
+    }
+
+    @Override
+    public int getId() {
+        return 0;
     }
 }

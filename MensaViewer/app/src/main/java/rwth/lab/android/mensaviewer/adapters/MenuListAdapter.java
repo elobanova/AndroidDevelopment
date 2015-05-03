@@ -8,12 +8,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import rwth.lab.android.mensaviewer.R;
+import rwth.lab.android.mensaviewer.model.IMenuItem;
 import rwth.lab.android.mensaviewer.model.Menu;
 
 /**
  * Created by ekaterina on 01.05.2015.
  */
-public class MenuListAdapter extends AbstractListAdapter<Menu> {
+public class MenuListAdapter extends AbstractListAdapter<IMenuItem> {
 
     public MenuListAdapter(Context context) {
         super(context);
@@ -32,11 +33,11 @@ public class MenuListAdapter extends AbstractListAdapter<Menu> {
         }
 
         if (view instanceof LinearLayout) {
-            Menu item = (Menu) getItem(position);
+            IMenuItem item = (IMenuItem) getItem(position);
             TextView category = (TextView)view.findViewById(R.id.category);
             category.setText(item.getCategory());
             TextView dish = (TextView)view.findViewById(R.id.dish);
-            dish.setText(item.getMenu());
+            dish.setText(item.getDish());
             TextView price = (TextView)view.findViewById(R.id.price);
             price.setText(item.getPrice());
         }

@@ -5,11 +5,12 @@ import java.io.Serializable;
 /**
  * Created by evgenijavstein on 29/04/15.
  */
-public class Menu implements Serializable, IListItem {
+public class Menu implements IMenuItem {
     private String category;
     private String menu;
     private String price;
 
+    @Override
     public String getCategory() {
         return this.category;
     }
@@ -18,7 +19,8 @@ public class Menu implements Serializable, IListItem {
         this.category = category;
     }
 
-    public String getMenu() {
+    @Override
+    public String getDish() {
         return this.menu;
     }
 
@@ -26,6 +28,7 @@ public class Menu implements Serializable, IListItem {
         this.menu = menu;
     }
 
+    @Override
     public String getPrice() {
         return this.price;
     }
