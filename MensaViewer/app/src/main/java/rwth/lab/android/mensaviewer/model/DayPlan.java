@@ -1,14 +1,35 @@
 package rwth.lab.android.mensaviewer.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by evgenijavstein on 29/04/15.
  */
-public class DayPlan {
+public class DayPlan implements Serializable{
 
     private String header;
+    private String note;
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    private boolean mensaOpen=true;
+
+    public boolean isMensaOpen() {
+        return mensaOpen;
+    }
+
+    public void setMensaOpen(boolean mensaOpen) {
+        this.mensaOpen = mensaOpen;
+    }
+
     private List<Menu> menues;
     private List<Extra> extras;
 

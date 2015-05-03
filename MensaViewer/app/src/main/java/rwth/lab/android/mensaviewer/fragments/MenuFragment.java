@@ -3,32 +3,40 @@ package rwth.lab.android.mensaviewer.fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ListFragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import rwth.lab.android.mensaviewer.MensaMenuActivity;
+import rwth.lab.android.mensaviewer.R;
 import rwth.lab.android.mensaviewer.adapters.MenuListAdapter;
 import rwth.lab.android.mensaviewer.model.DayPlan;
 import rwth.lab.android.mensaviewer.model.IMenuItem;
-import rwth.lab.android.mensaviewer.model.Menu;
 
 /**
  * Created by ekaterina on 01.05.2015.
  */
 public class MenuFragment extends ListFragment {
-    public static final String MENUES_KEY = "MENUES";
+    public static final String DAYPLAN_KEY = "MENUES";
 
     private List<IMenuItem> menuItems;
     private MenuListAdapter adapter;
+    private DayPlan dayPlan;
 
     public static MenuFragment newInstance(DayPlan dayPlan) {
+
         Bundle args = new Bundle();
-        List<IMenuItem> menuEntries = dayPlan.getMenuItems();
-        args.putSerializable(MENUES_KEY, (Serializable) menuEntries);
+
+        args.putSerializable(DAYPLAN_KEY, (Serializable) dayPlan);//TODO allright that way?
 
         MenuFragment fragment = new MenuFragment();
+
         fragment.setArguments(args);
         return fragment;
     }
@@ -36,15 +44,35 @@ public class MenuFragment extends ListFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.menuItems = (ArrayList) getArguments().getSerializable(MENUES_KEY);
-        this.adapter = new MenuListAdapter(getActivity().getApplicationContext());
-        addMenuItemsToAdapter();
-        setListAdapter(this.adapter);
+        this.dayPlan = (DayPlan) getArguments().getSerializable(DAYPLAN_KEY);
+
+        if(dayPlan.isMensaOpen()) {
+            this.menuItems = dayPlan.getMenuItems();
+            this.adapter = new MenuListAdapter(getActivity().getApplicationContext());
+            addMenuItemsToAdapter();
+            setListAdapter(this.adapter);
+        }
+
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.mensa_menu_list_fragment, container, false);
+
+        return view;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        if(!dayPlan.isMensaOpen()){
+
+            TextView note=(TextView)getView().findViewById(R.id.mensaClosedNote);
+
+            note.setText(dayPlan.getNote());
+            note.setVisibility(View.VISIBLE);
+        }
         getListView().setChoiceMode(ListView.CHOICE_MODE_NONE);
     }
 

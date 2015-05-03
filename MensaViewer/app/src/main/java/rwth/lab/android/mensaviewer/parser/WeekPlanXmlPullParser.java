@@ -101,8 +101,8 @@ public class WeekPlanXmlPullParser {
      */
     private DayPlan readDayPlan(XmlPullParser parser) throws XmlPullParserException, IOException, IllegalStateException {
         String header = null;
-        List<Menu> menues;
-        List<Extra> extras;
+        List<Menu> menues=null;
+        List<Extra> extras=null;
         String tagName;
         DayPlan dayPlan = new DayPlan();
         String attributeName = null;
@@ -127,8 +127,16 @@ public class WeekPlanXmlPullParser {
                 dayPlan.setHeader(header);
             } else if ("div".equalsIgnoreCase(tagName) &&
                     attributeEqualsIfNotNull(attributeName, attributeValue, "class", "default-panel")) {
-                menues = readMenues(parser);//might fail, then whole dayplan is skipped, see exception handling one level above
-                extras = readExtras(parser);
+                //state 2: default-panel
+                if(readAndStopBySpecifiedTable(parser, "menues", 2)) {//if table found
+                    menues = readMenues(parser);//might fail, then whole dayplan is skipped, see exception handling one level above
+                    extras = readExtras(parser);
+                }else {
+                    dayPlan.setMensaOpen(false);
+                    dayPlan.setNote(readTextAndSupText(parser, "div"));
+
+                }
+
                 dayPlan.setMenues(menues);
                 dayPlan.setExtras(extras);
                 break;
@@ -160,20 +168,32 @@ public class WeekPlanXmlPullParser {
                 attributeValue.equalsIgnoreCase(value));
     }
 
-    private void readAndStopBySpecifiedTable(XmlPullParser parser, String table, int depth) throws XmlPullParserException, IOException {
+    /**
+     * Navigates to specified table, returns true if table is found, else false...
+     * @param parser
+     * @param table
+     * @param depth
+     * @return
+     * @throws XmlPullParserException
+     * @throws IOException
+     */
+    private boolean readAndStopBySpecifiedTable(XmlPullParser parser, String table, int depth) throws XmlPullParserException, IOException {
         while (parser.next() != XmlPullParser.END_DOCUMENT && depth > 0) {
             if ("table".equalsIgnoreCase(parser.getName()) &&
-                    attributeEqualsIfNotNull(parser.getAttributeName(0), parser.getAttributeValue(0), "class", table))
-                return;
+                    attributeEqualsIfNotNull(parser.getAttributeName(0), parser.getAttributeValue(0), "class", table)) {
+                return true;
+            }else if("div".equalsIgnoreCase(parser.getName())&&attributeEqualsIfNotNull(parser.getAttributeName(0), parser.getAttributeValue(0),               "id", "note")){
+                return false;
+            }
             depth--;
         }
+        return false;
     }
 
     private List<Menu> readMenues(XmlPullParser parser) throws XmlPullParserException, IOException {
         List<Menu> menues = new ArrayList<Menu>();
 
-        //state 2: default-panel
-        readAndStopBySpecifiedTable(parser, "menues", 2);
+
         int event;
         //state 3: menues table
         while ((event = parser.next()) != XmlPullParser.END_DOCUMENT) {
