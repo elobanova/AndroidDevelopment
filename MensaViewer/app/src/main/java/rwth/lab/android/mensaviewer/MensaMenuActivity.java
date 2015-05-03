@@ -7,9 +7,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import rwth.lab.android.mensaviewer.fragments.MensaWeekPlanFragment;
+import rwth.lab.android.mensaviewer.model.MensaListItem;
 
 /**
- * Created by я on 30.04.2015.
+ * Created by ekaterina on 30.04.2015.
  */
 public class MensaMenuActivity extends FragmentActivity {
     private final static int MENU_REFRESH = Menu.FIRST;
@@ -20,6 +21,12 @@ public class MensaMenuActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mensa_week_plan_activity);
+        Bundle extras = getIntent().getExtras();
+        MensaListItem mensaListItem = (MensaListItem) extras.getSerializable(ViewerInitialActivity.MENSA_ITEM);
+        if (mensaListItem != null) {
+            setTitle(mensaListItem.getMensaName());
+        }
+
         FragmentManager fragmentManager = getFragmentManager();
         //fetch the fragment if it was saved (e.g. during orientation change)
         this.weekPlanFragment = (MensaWeekPlanFragment) fragmentManager.findFragmentByTag(FRAGMENT_TAG);
@@ -27,7 +34,7 @@ public class MensaMenuActivity extends FragmentActivity {
             // add the fragment
             weekPlanFragment = new MensaWeekPlanFragment();
             fragmentManager.beginTransaction().add(R.id.fragment_container, weekPlanFragment, FRAGMENT_TAG).commit();
-            weekPlanFragment.setArguments(getIntent().getExtras());
+            weekPlanFragment.setArguments(extras);
         }
     }
 

@@ -9,7 +9,7 @@ import java.util.List;
 import rwth.lab.android.mensaviewer.model.IListItem;
 
 /**
- * Created by я on 01.05.2015.
+ * Created by ekaterina on 01.05.2015.
  */
 public abstract class AbstractListAdapter<T extends IListItem> extends BaseAdapter {
     protected final List<T> items = new ArrayList<T>();

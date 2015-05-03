@@ -62,9 +62,11 @@ public class ViewerInitialActivity extends ListActivity {
 
     private void addMensaItemsToAdapter() {
         if (this.adapter != null) {
-            //TODO: retrieve a list of mensas from website, can be left as it is now
-            this.adapter.add(new MensaListItem("Mensa Ahornstraße", "http://www.studentenwerk-aachen.de/speiseplaene/ahornstrasse-w.html", 0));
-            this.adapter.add(new MensaListItem("Mensa Vita", "http://www.studentenwerk-aachen.de/speiseplaene/vita-w.html", 1));
+            this.adapter.add(new MensaListItem("Mensa Academica", "http://www.studentenwerk-aachen.de/speiseplaene/academica-w.html", 0));
+            this.adapter.add(new MensaListItem("Mensa Ahornstraße", "http://www.studentenwerk-aachen.de/speiseplaene/ahornstrasse-w.html", 1));
+            this.adapter.add(new MensaListItem("Mensa Bistro Templergraben", "http://www.studentenwerk-aachen.de/speiseplaene/templergraben-w.html", 2));
+            this.adapter.add(new MensaListItem("Mensa Bayernallee", "http://www.studentenwerk-aachen.de/speiseplaene/bayernallee-w.html", 3));
+            this.adapter.add(new MensaListItem("Mensa Vita", "http://www.studentenwerk-aachen.de/speiseplaene/vita-w.html", 4));
         }
     }
 

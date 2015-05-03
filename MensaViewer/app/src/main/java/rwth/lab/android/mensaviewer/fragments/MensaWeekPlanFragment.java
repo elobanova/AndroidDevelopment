@@ -19,7 +19,7 @@ import rwth.lab.android.mensaviewer.model.MensaListItem;
 import rwth.lab.android.mensaviewer.model.WeekPlan;
 
 /**
- * Created by я on 03.05.2015.
+ * Created by ekaterina on 03.05.2015.
  */
 public class MensaWeekPlanFragment extends Fragment {
     private static final String TAG = "Mensa-Viewer";

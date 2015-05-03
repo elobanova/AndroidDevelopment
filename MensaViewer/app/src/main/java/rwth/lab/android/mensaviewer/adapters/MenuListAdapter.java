@@ -11,7 +11,7 @@ import rwth.lab.android.mensaviewer.R;
 import rwth.lab.android.mensaviewer.model.Menu;
 
 /**
- * Created by я on 01.05.2015.
+ * Created by ekaterina on 01.05.2015.
  */
 public class MenuListAdapter extends AbstractListAdapter<Menu> {
 
