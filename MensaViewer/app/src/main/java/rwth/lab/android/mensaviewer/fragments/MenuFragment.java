@@ -1,7 +1,9 @@
 package rwth.lab.android.mensaviewer.fragments;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ListFragment;
+import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +48,12 @@ public class MenuFragment extends ListFragment {
         this.adapter = new MenuListAdapter(getActivity().getApplicationContext());
         addMenuItemsToAdapter();
         setListAdapter(this.adapter);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        getListView().setChoiceMode(ListView.CHOICE_MODE_NONE);
     }
 
     private void addMenuItemsToAdapter() {

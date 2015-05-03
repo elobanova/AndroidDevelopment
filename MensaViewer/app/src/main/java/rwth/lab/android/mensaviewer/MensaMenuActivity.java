@@ -1,55 +1,57 @@
 package rwth.lab.android.mensaviewer;
 
+import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.view.ViewPager;
-import android.view.View;
-import android.widget.LinearLayout;
+import android.view.Menu;
+import android.view.MenuItem;
 
-import rwth.lab.android.mensaviewer.adapters.MenuFragmentPagerAdapter;
-import rwth.lab.android.mensaviewer.http.OnResponseListener;
-import rwth.lab.android.mensaviewer.http.WeekPlanGetRequest;
-import rwth.lab.android.mensaviewer.model.MensaListItem;
-import rwth.lab.android.mensaviewer.model.WeekPlan;
+import rwth.lab.android.mensaviewer.fragments.MensaWeekPlanFragment;
 
 /**
  * Created by я on 30.04.2015.
  */
 public class MensaMenuActivity extends FragmentActivity {
-    public static final int DEFAULT_FONT_SIZE = 24;
-    private MensaListItem mensa;
-    private WeekPlanGetRequest getRequest;
+    private final static int MENU_REFRESH = Menu.FIRST;
+    private final static String FRAGMENT_TAG = "data";
+    private MensaWeekPlanFragment weekPlanFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.mensa_menu_activity);
-
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            mensa = (MensaListItem) extras.getSerializable(ViewerInitialActivity.MENSA_ITEM);
-            final LinearLayout progressIndicator = (LinearLayout) findViewById(R.id.progressIndicator);
-            getRequest = new WeekPlanGetRequest(mensa);
-            getRequest.setOnResponseListener(new OnResponseListener() {
-                @Override
-                public void onPreExecute() {
-                    progressIndicator.setVisibility(View.VISIBLE);
-                }
-
-                @Override
-                public void onResponse(WeekPlan weekPlan) {
-                    ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
-                    viewPager.setAdapter(new MenuFragmentPagerAdapter(weekPlan, getSupportFragmentManager(),
-                            MensaMenuActivity.this));
-                    progressIndicator.setVisibility(View.GONE);
-                }
-
-                @Override
-                public void onError(String errorMessage) {
-
-                }
-            });
-            getRequest.send();
+        setContentView(R.layout.mensa_week_plan_activity);
+        FragmentManager fragmentManager = getFragmentManager();
+        //fetch the fragment if it was saved (e.g. during orientation change)
+        this.weekPlanFragment = (MensaWeekPlanFragment) fragmentManager.findFragmentByTag(FRAGMENT_TAG);
+        if (weekPlanFragment == null) {
+            // add the fragment
+            weekPlanFragment = new MensaWeekPlanFragment();
+            fragmentManager.beginTransaction().add(R.id.fragment_container, weekPlanFragment, FRAGMENT_TAG).commit();
+            weekPlanFragment.setArguments(getIntent().getExtras());
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        menu.add(Menu.NONE, MENU_REFRESH, Menu.NONE, R.string.refresh);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case MENU_REFRESH:
+                refresh();
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    private void refresh() {
+        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction().remove(weekPlanFragment).commit();
+        recreate();
     }
 }
