@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import rwth.lab.android.mensaviewer.R;
 import rwth.lab.android.mensaviewer.ViewerInitialActivity;
@@ -62,6 +63,10 @@ public class MensaWeekPlanFragment extends Fragment {
 
     private void showWeekPlan(View view) {
         if (view != null) {
+            TextView priceNotes = (TextView) view.findViewById(R.id.price_notes);
+            priceNotes.setText(this.weekPlan.getPriceNote());
+            TextView additivities = (TextView) view.findViewById(R.id.additivities);
+            additivities.setText(this.weekPlan.getAddtitives());
             ViewPager viewPager = (ViewPager) view.findViewById(R.id.pager);
             viewPager.setAdapter(new MenuFragmentPagerAdapter(this.weekPlan, ((FragmentActivity) getActivity()).getSupportFragmentManager(),
                     getActivity()));
@@ -73,7 +78,7 @@ public class MensaWeekPlanFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.mensa_menu_activity, container, false);
+        View view = inflater.inflate(R.layout.mensa_menu_fragment, container, false);
         if (this.weekPlan == null) {
             // display the busy indicator if the week plan is not yet loaded
             this.progressIndicator = (LinearLayout) view.findViewById(R.id.progressIndicator);

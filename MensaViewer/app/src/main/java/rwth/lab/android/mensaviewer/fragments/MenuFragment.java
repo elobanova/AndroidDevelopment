@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ListFragment;
 import android.widget.ListView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,21 +17,15 @@ import rwth.lab.android.mensaviewer.model.Menu;
  * Created by ekaterina on 01.05.2015.
  */
 public class MenuFragment extends ListFragment {
-    public static final String MENUES_COUNT = "MENUES_COUNT";
-    public static final String MENU_PREFIX = "MENU";
+    public static final String MENUES_KEY = "MENUES";
 
     private List<Menu> menues;
-    private int menuesCount;
     private MenuListAdapter adapter;
 
     public static MenuFragment newInstance(DayPlan dayPlan) {
         Bundle args = new Bundle();
         List<Menu> menues = dayPlan.getMenues();
-        int menuesSize = menues.size();
-        args.putInt(MENUES_COUNT, menuesSize);
-        for (int i = 0; i < menuesSize; i++) {
-            args.putSerializable(MENU_PREFIX + i, menues.get(i));
-        }
+        args.putSerializable(MENUES_KEY, (Serializable) menues);
 
         MenuFragment fragment = new MenuFragment();
         fragment.setArguments(args);
@@ -40,11 +35,7 @@ public class MenuFragment extends ListFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.menuesCount = getArguments().getInt(MENUES_COUNT);
-        this.menues = new ArrayList<Menu>();
-        for (int i = 0; i < this.menuesCount; i++) {
-            menues.add(i, (Menu) getArguments().getSerializable(MENU_PREFIX + i));
-        }
+        this.menues = (ArrayList) getArguments().getSerializable(MENUES_KEY);
         this.adapter = new MenuListAdapter(getActivity().getApplicationContext());
         addMenuItemsToAdapter();
         setListAdapter(this.adapter);
