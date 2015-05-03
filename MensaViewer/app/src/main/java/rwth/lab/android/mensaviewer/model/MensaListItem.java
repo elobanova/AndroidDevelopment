@@ -5,15 +5,13 @@ import java.io.Serializable;
 /**
  * Created by ekaterina on 30.04.2015.
  */
-public class MensaListItem implements Serializable, IListItem {
+public class MensaListItem implements Serializable {
     private final String mensaName;
     private final String mensaURL;
-    private final int mensaId;
 
-    public MensaListItem(String mensaName, String mensaURL, int mensaId) {
+    public MensaListItem(String mensaName, String mensaURL) {
         this.mensaName = mensaName;
         this.mensaURL = mensaURL;
-        this.mensaId = mensaId;
     }
 
     public String getMensaName() {
@@ -22,10 +20,5 @@ public class MensaListItem implements Serializable, IListItem {
 
     public String getMensaURL() {
         return this.mensaURL;
-    }
-
-    @Override
-    public int getId() {
-        return this.mensaId;
     }
 }

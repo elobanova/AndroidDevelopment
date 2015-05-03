@@ -29,9 +29,4 @@ public class Extra implements IMenuItem {
     public String getPrice() {
         return "";
     }
-
-    @Override
-    public int getId() {
-        return 0;
-    }
 }

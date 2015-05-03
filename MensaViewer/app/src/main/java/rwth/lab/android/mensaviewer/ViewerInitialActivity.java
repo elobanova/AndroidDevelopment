@@ -62,11 +62,11 @@ public class ViewerInitialActivity extends ListActivity {
 
     private void addMensaItemsToAdapter() {
         if (this.adapter != null) {
-            this.adapter.add(new MensaListItem("Mensa Academica", "http://www.studentenwerk-aachen.de/speiseplaene/academica-w.html", 0));
-            this.adapter.add(new MensaListItem("Mensa Ahornstraße", "http://www.studentenwerk-aachen.de/speiseplaene/ahornstrasse-w.html", 1));
-            this.adapter.add(new MensaListItem("Mensa Bistro Templergraben", "http://www.studentenwerk-aachen.de/speiseplaene/templergraben-w.html", 2));
-            this.adapter.add(new MensaListItem("Mensa Bayernallee", "http://www.studentenwerk-aachen.de/speiseplaene/bayernallee-w.html", 3));
-            this.adapter.add(new MensaListItem("Mensa Vita", "http://www.studentenwerk-aachen.de/speiseplaene/vita-w.html", 4));
+            this.adapter.add(new MensaListItem("Mensa Academica", "http://www.studentenwerk-aachen.de/speiseplaene/academica-w.html"));
+            this.adapter.add(new MensaListItem("Mensa Ahornstraße", "http://www.studentenwerk-aachen.de/speiseplaene/ahornstrasse-w.html"));
+            this.adapter.add(new MensaListItem("Mensa Bistro Templergraben", "http://www.studentenwerk-aachen.de/speiseplaene/templergraben-w.html"));
+            this.adapter.add(new MensaListItem("Mensa Bayernallee", "http://www.studentenwerk-aachen.de/speiseplaene/bayernallee-w.html"));
+            this.adapter.add(new MensaListItem("Mensa Vita", "http://www.studentenwerk-aachen.de/speiseplaene/vita-w.html"));
         }
     }
 

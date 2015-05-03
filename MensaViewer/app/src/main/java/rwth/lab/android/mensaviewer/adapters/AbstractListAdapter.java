@@ -3,15 +3,14 @@ package rwth.lab.android.mensaviewer.adapters;
 import android.content.Context;
 import android.widget.BaseAdapter;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
-import rwth.lab.android.mensaviewer.model.IListItem;
 
 /**
  * Created by ekaterina on 01.05.2015.
  */
-public abstract class AbstractListAdapter<T extends IListItem> extends BaseAdapter {
+public abstract class AbstractListAdapter<T extends Serializable> extends BaseAdapter {
     protected final List<T> items = new ArrayList<T>();
     protected final Context context;
 
@@ -40,7 +39,7 @@ public abstract class AbstractListAdapter<T extends IListItem> extends BaseAdapt
     }
 
     @Override
-    public long getItemId(int pos) {
-        return items.get(pos).getId();
+    public long getItemId(int position) {
+        return position;
     }
 }

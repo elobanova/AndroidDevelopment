@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import rwth.lab.android.mensaviewer.R;
 import rwth.lab.android.mensaviewer.model.IMenuItem;
-import rwth.lab.android.mensaviewer.model.Menu;
 
 /**
  * Created by ekaterina on 01.05.2015.

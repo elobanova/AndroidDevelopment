@@ -1,7 +1,5 @@
 package rwth.lab.android.mensaviewer.model;
 
-import java.io.Serializable;
-
 /**
  * Created by evgenijavstein on 29/04/15.
  */
@@ -35,11 +33,5 @@ public class Menu implements IMenuItem {
 
     public void setPrice(String price) {
         this.price = price;
-    }
-
-    @Override
-    public int getId() {
-        //TODO
-        return 0;
     }
 }
