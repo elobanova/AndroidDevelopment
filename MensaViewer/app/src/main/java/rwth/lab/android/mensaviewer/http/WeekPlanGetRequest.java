@@ -41,6 +41,11 @@ public class WeekPlanGetRequest {
     }
 
     private class HttpGetTask extends AsyncTask<MensaListItem, Void, WeekPlan> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            onResponseListener.onPreExecute();
+        }
 
         @Override
         protected WeekPlan doInBackground(MensaListItem... params) {

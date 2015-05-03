@@ -3,6 +3,8 @@ package rwth.lab.android.mensaviewer;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.view.View;
+import android.widget.LinearLayout;
 
 import rwth.lab.android.mensaviewer.adapters.MenuFragmentPagerAdapter;
 import rwth.lab.android.mensaviewer.http.OnResponseListener;
@@ -26,15 +28,20 @@ public class MensaMenuActivity extends FragmentActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             mensa = (MensaListItem) extras.getSerializable(ViewerInitialActivity.MENSA_ITEM);
-
-            //TODO continue
+            final LinearLayout progressIndicator = (LinearLayout) findViewById(R.id.progressIndicator);
             getRequest = new WeekPlanGetRequest(mensa);
             getRequest.setOnResponseListener(new OnResponseListener() {
+                @Override
+                public void onPreExecute() {
+                    progressIndicator.setVisibility(View.VISIBLE);
+                }
+
                 @Override
                 public void onResponse(WeekPlan weekPlan) {
                     ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
                     viewPager.setAdapter(new MenuFragmentPagerAdapter(weekPlan, getSupportFragmentManager(),
                             MensaMenuActivity.this));
+                    progressIndicator.setVisibility(View.GONE);
                 }
 
                 @Override
