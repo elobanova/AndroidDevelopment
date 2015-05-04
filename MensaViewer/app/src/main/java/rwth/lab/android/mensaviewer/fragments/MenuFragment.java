@@ -10,10 +10,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
-import rwth.lab.android.mensaviewer.MensaMenuActivity;
 import rwth.lab.android.mensaviewer.R;
 import rwth.lab.android.mensaviewer.adapters.MenuListAdapter;
 import rwth.lab.android.mensaviewer.model.DayPlan;
@@ -30,11 +28,8 @@ public class MenuFragment extends ListFragment {
     private DayPlan dayPlan;
 
     public static MenuFragment newInstance(DayPlan dayPlan) {
-
         Bundle args = new Bundle();
-
-        args.putSerializable(DAYPLAN_KEY, (Serializable) dayPlan);//TODO allright that way?
-
+        args.putSerializable(DAYPLAN_KEY, (Serializable) dayPlan);
         MenuFragment fragment = new MenuFragment();
 
         fragment.setArguments(args);
@@ -46,30 +41,25 @@ public class MenuFragment extends ListFragment {
         super.onCreate(savedInstanceState);
         this.dayPlan = (DayPlan) getArguments().getSerializable(DAYPLAN_KEY);
 
-        if(dayPlan.isMensaOpen()) {
+        if (dayPlan.isMensaOpen()) {
             this.menuItems = dayPlan.getMenuItems();
             this.adapter = new MenuListAdapter(getActivity().getApplicationContext());
             addMenuItemsToAdapter();
             setListAdapter(this.adapter);
         }
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.mensa_menu_list_fragment, container, false);
-
-        return view;
+        return inflater.inflate(R.layout.mensa_menu_list_fragment, container, false);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        if(!dayPlan.isMensaOpen()){
-
-            TextView note=(TextView)getView().findViewById(R.id.mensaClosedNote);
-
+        if (!dayPlan.isMensaOpen()) {
+            TextView note = (TextView) getView().findViewById(R.id.mensaClosedNote);
             note.setText(dayPlan.getNote());
             note.setVisibility(View.VISIBLE);
         }

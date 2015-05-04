@@ -98,7 +98,6 @@ public class ViewerInitialActivity extends ListActivity {
      * Start a Browser Activity to view a web page or its URL.
      */
     public void startImplicitActivation() {
-
         Log.i(TAG, "Entered startImplicitActivation()");
 
         // Create a base intent for viewing a URL

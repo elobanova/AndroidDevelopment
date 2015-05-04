@@ -101,8 +101,8 @@ public class WeekPlanXmlPullParser {
      */
     private DayPlan readDayPlan(XmlPullParser parser) throws XmlPullParserException, IOException, IllegalStateException {
         String header = null;
-        List<Menu> menues=null;
-        List<Extra> extras=null;
+        List<Menu> menues = null;
+        List<Extra> extras = null;
         String tagName;
         DayPlan dayPlan = new DayPlan();
         String attributeName = null;
@@ -128,10 +128,10 @@ public class WeekPlanXmlPullParser {
             } else if ("div".equalsIgnoreCase(tagName) &&
                     attributeEqualsIfNotNull(attributeName, attributeValue, "class", "default-panel")) {
                 //state 2: default-panel
-                if(readAndStopBySpecifiedTable(parser, "menues", 2)) {//if table found
+                if (readAndStopBySpecifiedTable(parser, "menues", 2)) {//if table found
                     menues = readMenues(parser);//might fail, then whole dayplan is skipped, see exception handling one level above
                     extras = readExtras(parser);
-                }else {
+                } else {
                     dayPlan.setMensaOpen(false);
                     dayPlan.setNote(readTextAndSupText(parser, "div"));
 
@@ -151,8 +151,6 @@ public class WeekPlanXmlPullParser {
         if ((event == XmlPullParser.TEXT)) {
             text = parser.getText();
             return removeWhitespaceCharacters(text); //remove all multiple occurences of whitespace/escape characters
-        } else {
-
         }
         return null;
     }
@@ -170,6 +168,7 @@ public class WeekPlanXmlPullParser {
 
     /**
      * Navigates to specified table, returns true if table is found, else false...
+     *
      * @param parser
      * @param table
      * @param depth
@@ -182,7 +181,7 @@ public class WeekPlanXmlPullParser {
             if ("table".equalsIgnoreCase(parser.getName()) &&
                     attributeEqualsIfNotNull(parser.getAttributeName(0), parser.getAttributeValue(0), "class", table)) {
                 return true;
-            }else if("div".equalsIgnoreCase(parser.getName())&&attributeEqualsIfNotNull(parser.getAttributeName(0), parser.getAttributeValue(0),               "id", "note")){
+            } else if ("div".equalsIgnoreCase(parser.getName()) && attributeEqualsIfNotNull(parser.getAttributeName(0), parser.getAttributeValue(0), "id", "note")) {
                 return false;
             }
             depth--;
@@ -192,8 +191,6 @@ public class WeekPlanXmlPullParser {
 
     private List<Menu> readMenues(XmlPullParser parser) throws XmlPullParserException, IOException {
         List<Menu> menues = new ArrayList<Menu>();
-
-
         int event;
         //state 3: menues table
         while ((event = parser.next()) != XmlPullParser.END_DOCUMENT) {
@@ -217,7 +214,6 @@ public class WeekPlanXmlPullParser {
         int event;
         while ((event = parser.next()) != XmlPullParser.END_DOCUMENT) {
             tagName = parser.getName();
-
             if (event == XmlPullParser.END_TAG && "tr".equalsIgnoreCase(tagName)) {
                 break;
             }

@@ -7,10 +7,13 @@ import java.util.List;
 /**
  * Created by evgenijavstein on 29/04/15.
  */
-public class DayPlan implements Serializable{
+public class DayPlan implements Serializable {
 
     private String header;
     private String note;
+    private List<Menu> menues;
+    private List<Extra> extras;
+    private boolean mensaOpen = true;
 
     public String getNote() {
         return note;
@@ -20,8 +23,6 @@ public class DayPlan implements Serializable{
         this.note = note;
     }
 
-    private boolean mensaOpen=true;
-
     public boolean isMensaOpen() {
         return mensaOpen;
     }
@@ -29,9 +30,6 @@ public class DayPlan implements Serializable{
     public void setMensaOpen(boolean mensaOpen) {
         this.mensaOpen = mensaOpen;
     }
-
-    private List<Menu> menues;
-    private List<Extra> extras;
 
     public List<Menu> getMenues() {
         return this.menues;
