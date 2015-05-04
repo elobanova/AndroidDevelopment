@@ -23,7 +23,6 @@ public class ViewerInitialActivity extends ListActivity {
 
     private static final int MENU_INFORMATION = Menu.FIRST;
     private static final String TAG = "Mensa-Viewer";
-    private static final String URL = "https://laboratory.comsys.rwth-aachen.de/groups/evgenijandkate";
     public static final String MENSA_ITEM = "item";
 
     private DialogFragment dialog;
@@ -62,12 +61,11 @@ public class ViewerInitialActivity extends ListActivity {
 
     private void addMensaItemsToAdapter() {
         if (this.adapter != null) {
-            this.adapter.add(new MensaListItem("Mensa Academica", "http://www.studentenwerk-aachen.de/speiseplaene/academica-w.html"));
-            this.adapter.add(new MensaListItem("Mensa Ahornstraße", "http://www.studentenwerk-aachen.de/speiseplaene/ahornstrasse-w.html"));
-            this.adapter.add(new MensaListItem("Mensa Bistro Templergraben", "http://www.studentenwerk-aachen.de/speiseplaene/templergraben-w.html"));
-            this.adapter.add(new MensaListItem("Mensa Bayernallee", "http://www.studentenwerk-aachen.de/speiseplaene/bayernallee-w.html"));
-            this.adapter.add(new MensaListItem("Mensa Vita", "http://www.studentenwerk-aachen.de/speiseplaene/vita-w.html"));
-        }
+            this.adapter.add(new MensaListItem(getString(R.string.mensa_academica), getString(R.string.mensa_acadamica_url)));
+            this.adapter.add(new MensaListItem(getString(R.string.mensa_ahorn), getString(R.string.mensa_ahorn_url)));
+            this.adapter.add(new MensaListItem(getString(R.string.mensa_templergraben), getString(R.string.mensa_templergraben_url)));
+            this.adapter.add(new MensaListItem(getString(R.string.mensa_bayernallee), getString(R.string.mensa_bayernalle_url)));
+        }      this.adapter.add(new MensaListItem(getString(R.string.mensa_vita), getString(R.string.mensa_vita_url)));
     }
 
     @Override
@@ -76,10 +74,10 @@ public class ViewerInitialActivity extends ListActivity {
 
         menu.add(Menu.NONE, MENU_INFORMATION, Menu.NONE, R.string.information);
         return true;
-    }
+        }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+        @Override
+        public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case MENU_INFORMATION:
                 showDialogFragment();
@@ -101,7 +99,7 @@ public class ViewerInitialActivity extends ListActivity {
         Log.i(TAG, "Entered startImplicitActivation()");
 
         // Create a base intent for viewing a URL
-        Uri webpage = Uri.parse(URL);
+        Uri webpage = Uri.parse(getString(R.string.group_url));
         Intent baseIntent = new Intent(Intent.ACTION_VIEW, webpage);
         startActivity(baseIntent);
     }
