@@ -48,6 +48,13 @@ public class WeekPlanXmlPullParser {
         }
     }
 
+    /**
+     * Navigates to h3 class="default-headline". If found tries to read a whole weel plan.
+     * @param parser
+     * @return
+     * @throws XmlPullParserException
+     * @throws IOException
+     */
     private WeekPlan readWeekPlan(XmlPullParser parser) throws XmlPullParserException, IOException {
         String priceNote = null;
         String additives = null;
@@ -202,6 +209,15 @@ public class WeekPlanXmlPullParser {
         return menues;
     }
 
+    /**
+     * Methods reads single menu. Should only be called if proper state is reached, namly
+     * if parser stopped inside menues table tag with
+     * @param parser
+     * @return
+     * @throws XmlPullParserException
+     * @throws IOException
+     */
+
     private Menu readSingleMenu(XmlPullParser parser) throws XmlPullParserException, IOException {
         Menu menu = new Menu();
         String tagName;
@@ -257,6 +273,13 @@ public class WeekPlanXmlPullParser {
         return removeWhitespaceCharacters(mTextBuilder.toString());
     }
 
+    /**
+     * Methods should be called when first table with menu was read and parser is inside the extra table tag.
+     * @param parser
+     * @return
+     * @throws XmlPullParserException
+     * @throws IOException
+     */
     private Extra readSingleExtra(XmlPullParser parser) throws XmlPullParserException, IOException {
         Extra extra = new Extra();
         String tagName;
@@ -278,6 +301,14 @@ public class WeekPlanXmlPullParser {
         return extra;
     }
 
+    /**
+     * Tries to find the extras table right after position where parser is currently.If found
+     * extra entries are parsed.
+     * @param parser
+     * @return
+     * @throws XmlPullParserException
+     * @throws IOException
+     */
     private List<Extra> readExtras(XmlPullParser parser) throws XmlPullParserException, IOException {
         List<Extra> extras = new ArrayList<Extra>();
         String tagName;
