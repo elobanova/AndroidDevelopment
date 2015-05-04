@@ -16,10 +16,11 @@
             android:id="@+id/category"
             android:padding="10dp"
             android:textSize="24sp"
-            android:background="#2fcaff"
-            android:textColor="#ffffff"
+            android:background="@color/blue_color"
+            android:textColor="@color/list_font_white"
             android:alpha="0.8" />
     </LinearLayout>
+
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -43,7 +44,7 @@
             android:padding="10dp"
             android:textSize="24sp"
             android:textStyle="bold"
-            android:background="#ffc5c5c5"
+            android:background="@color/light_gray_color"
             android:alpha="0.9" />
     </LinearLayout>
 </LinearLayout>
