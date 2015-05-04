@@ -55,7 +55,7 @@ public class MensaWeekPlanFragment extends Fragment {
 
             @Override
             public void onError(String errorMessage) {
-                Log.i(TAG, "Error during HTTP request: " + errorMessage);
+                Log.e(TAG, "Error during HTTP request: " + errorMessage);
             }
         });
         getRequest.send();

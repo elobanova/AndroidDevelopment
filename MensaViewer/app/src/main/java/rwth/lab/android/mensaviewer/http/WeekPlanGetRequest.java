@@ -1,6 +1,7 @@
 package rwth.lab.android.mensaviewer.http;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -20,6 +21,7 @@ import rwth.lab.android.mensaviewer.parser.WeekPlanXmlPullParser;
  * Created by evgenijavstein on 29/04/15.
  */
 public class WeekPlanGetRequest {
+    private static final String TAG = "Mensa-Viewer";
     private static final int READ_TIMEOUT = 10000; //milliseconds
     private static final int CONNECT_TIMEOUT = 15000;  //milliseconds
     private OnResponseListener onResponseListener;
@@ -66,18 +68,19 @@ public class WeekPlanGetRequest {
 
                 return parser.parse();
             } catch (MalformedURLException e) {
-                e.printStackTrace();
+                Log.e(TAG, "Error with URL: " + e.getMessage());
                 onResponseListener.onError(e.getMessage());
                 return null;
             } catch (ProtocolException e) {
-                e.printStackTrace();
+                Log.e(TAG, "Error with protocol: " + e.getMessage());
                 onResponseListener.onError(e.getMessage());
                 return null;
             } catch (IOException e) {
-                e.printStackTrace();
+                Log.e(TAG, "Error while working with a stream: " + e.getMessage());
                 onResponseListener.onError(e.getMessage());
                 return null;
             } catch (XmlPullParserException e) {
+                Log.e(TAG, "Error while parsing: " + e.getMessage());
                 onResponseListener.onError(e.getMessage());
                 return null;
             } finally {

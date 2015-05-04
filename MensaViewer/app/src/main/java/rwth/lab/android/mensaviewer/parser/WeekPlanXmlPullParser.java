@@ -1,5 +1,6 @@
 package rwth.lab.android.mensaviewer.parser;
 
+import android.util.Log;
 import android.util.Xml;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -21,6 +22,7 @@ import rwth.lab.android.mensaviewer.model.WeekPlan;
  * Created by evgenijavstein on 29/04/15.
  */
 public class WeekPlanXmlPullParser {
+    private static final String TAG = "Mensa-Viewer";
     private InputStream inputStream;
 
     public WeekPlanXmlPullParser(InputStream inputStream) {
@@ -40,8 +42,6 @@ public class WeekPlanXmlPullParser {
         try {
             XmlPullParser parser = Xml.newPullParser();
             parser.setInput(inputStream, "UTF-8");
-            // parser.nextTag();
-
             return readWeekPlan(parser);
         } finally {
             inputStream.close();
@@ -70,9 +70,9 @@ public class WeekPlanXmlPullParser {
                 try {
                     dayPlans.add(readDayPlan(parser));
                 } catch (XmlPullParserException e) {
-                    e.printStackTrace();
+                    Log.e(TAG, "Error while parsing: " + e.getMessage());
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    Log.e(TAG, "Error when working with a stream: " + e.getMessage());
                 }
             } else if ("p".equalsIgnoreCase(name) && attributeEqualsIfNotNull(attributeName, attributeValue, "id", "price-note")) {
                 priceNote = readTextAndSupText(parser, "p");
@@ -112,11 +112,6 @@ public class WeekPlanXmlPullParser {
         //state 1: headline of the day! should be  7 times here
         while ((event = parser.next()) != XmlPullParser.END_DOCUMENT) {
             tagName = parser.getName();
-//            if(event==XmlPullParser.END_TAG&&equalsIfNotNull(tagName,"div")){
-//                int i=0;
-//                break;
-//            }
-
             if (parser.getAttributeCount() >= 2) {
                 attributeName = parser.getAttributeName(1);
                 attributeValue = parser.getAttributeValue(1);
@@ -134,7 +129,6 @@ public class WeekPlanXmlPullParser {
                 } else {
                     dayPlan.setMensaOpen(false);
                     dayPlan.setNote(readTextAndSupText(parser, "div"));
-
                 }
 
                 dayPlan.setMenues(menues);
@@ -320,7 +314,7 @@ public class WeekPlanXmlPullParser {
             }
             reader.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.e(TAG, "Error while working with a stream: " + e.getMessage());
         }
         return out.toString();
     }
