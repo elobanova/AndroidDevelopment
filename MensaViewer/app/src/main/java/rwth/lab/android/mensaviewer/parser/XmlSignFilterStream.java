@@ -8,10 +8,10 @@ import java.util.Deque;
 /**
  * Created by evgenijavstein on 30/04/15.
  *
- * Helper class to get rid of & signs which
- * makes the XMLPullParser fails, since & signs should be
- * encoded as &amp;
- * Probably a better approach would be not to use an XML Parser, or to fix the HTML source
+ * Helper class to get rid of "&"-signs which
+ * make the XMLPullParser crash, since "&"-signs should be
+ * encoded as &amp; in XML
+ * Probably, a better approach would be not to use an XML parser, or to fixing the HTML source.
  * -> Thanks to mhaller at stackoverlow.com
  */
 public class XmlSignFilterStream extends InputStream {
