@@ -18,11 +18,19 @@ public abstract class AbstractListAdapter<T extends Serializable> extends BaseAd
         this.context = context;
     }
 
+    /**
+     * Adds the item into a list of items stored in adapter
+     *
+     * @param item a serializable item to be added to an adapter items
+     */
     public void add(T item) {
         items.add(item);
         notifyDataSetChanged();
     }
 
+    /**
+     * Clears the items from a list of items stored in adapter
+     */
     public void clear() {
         items.clear();
         notifyDataSetChanged();

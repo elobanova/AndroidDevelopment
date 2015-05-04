@@ -38,6 +38,10 @@ public class MensaWeekPlanFragment extends Fragment {
         loadData();
     }
 
+    /**
+     * Creates and sends an Http GET request and delegates retrieving
+     * of the mensa menu list to the parser
+     */
     private void loadData() {
         getRequest = new WeekPlanGetRequest(this.mensaListItem);
         getRequest.setOnResponseListener(new OnResponseListener() {
@@ -61,6 +65,12 @@ public class MensaWeekPlanFragment extends Fragment {
         getRequest.send();
     }
 
+    /**
+     * Performs filling out the view components with the data (notes, additional dish information)
+     * and a menu fragment via adapter
+     *
+     * @param view a view for the fragment
+     */
     private void showWeekPlan(View view) {
         if (view != null) {
             TextView priceNotes = (TextView) view.findViewById(R.id.price_notes);

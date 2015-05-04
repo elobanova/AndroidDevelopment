@@ -27,6 +27,12 @@ public class MenuFragment extends ListFragment {
     private MenuListAdapter adapter;
     private DayPlan dayPlan;
 
+    /**
+     * Creates an instance of a menu fragment passing the day plan to its bundle
+     *
+     * @param dayPlan a day plan for this mensa
+     * @return an instance of a newly created menu fragment
+     */
     public static MenuFragment newInstance(DayPlan dayPlan) {
         Bundle args = new Bundle();
         args.putSerializable(DAYPLAN_KEY, (Serializable) dayPlan);
@@ -66,6 +72,10 @@ public class MenuFragment extends ListFragment {
         getListView().setChoiceMode(ListView.CHOICE_MODE_NONE);
     }
 
+    /**
+     * Adds the menu items (extras and menues)
+     * to the menu list adapter
+     */
     private void addMenuItemsToAdapter() {
         if (this.adapter != null && this.menuItems != null) {
             for (IMenuItem menu : this.menuItems) {
